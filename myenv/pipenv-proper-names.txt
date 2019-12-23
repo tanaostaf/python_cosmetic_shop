@@ -1,0 +1,16 @@
+Flask
+Flask-Admin
+Flask-Bcrypt
+Flask-CKEditor
+Flask-Login
+Flask-Migrate
+Flask-Script
+Flask-SQLAlchemy
+Flask-WTF
+Jinja2
+Mako
+MarkupSafe
+Pillow
+SQLAlchemy
+Werkzeug
+WTForms

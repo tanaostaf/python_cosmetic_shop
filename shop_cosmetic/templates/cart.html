@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="cart">
+    {% if cart %}
+        {% for product in cart.products %}
+            <article class="media cart-1">
+                <div class="media-body ">
+                    <p class="article-content">
+                      <h2><a class="article-title" href="{{url_for('product', product_id=product.id)}}">{{ product.p_name }}</a></h2>
+                      <p class="article-content demoFont"><div class="demoFont">Description: </div>{{ product.description | safe}}</p>
+                      <p class="article-content"><div class="demoFont">Price: </div>{{ product.price }}₴</p>
+                    </p>
+                </div>
+                <articles class="cart-block">
+                <img class="img-fluid rounded cart-img-2" src="{{ url_for('static', filename='images/'+ product.image)}}">
+                </articles>
+            </article>
+        {% endfor %}
+        <hr class="line">
+        <table width="50%" cellpadding="5">
+            <tr>
+                <th>
+                    <article class="media cart-total">
+                        <div class="media-body">
+                            <b class="demoFont">Total price: </b>{{ cart.total_price }} ₴
+                        </div>
+                    </article>
+                </th>
+                <th>
+                    <form method="POST" action="/order">
+                        <p><button class="btn button_1" value="{{ cart.id }}" name="cart_id" type="submit">Order</button></p>
+                    </form>
+                </th>
+            </tr>
+        </table>
+    {% else %}
+       <article class="media content-section">
+           <div class="media-body">
+               <h2>Your cart is empty</h2>
+           </div>
+       </article>
+    {% endif %}
+</div>
+{% endblock content %}

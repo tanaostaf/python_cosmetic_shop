@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block content %}
+   <div class="content-section">
+   	<div class="media">
+        <div class="media-body">
+    			<h2 class="account-heading">{{ current_user.username }}</h2>
+    			<p class="text-secondary">{{ current_user.email }}</p>
+        </div>
+   	</div>
+         <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom big mb-4">Account Info</legend>
+                <div class="form-group">
+                    <table  width="100%" cellpadding="5" >
+                        <tr>
+                            <th>
+                                {{ form.username.label(class="form-control-label demoFont") }}
+                                {% if form.username.errors %}
+                                {{ form.username(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.username(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </th>
+                            <th>
+                                {{ form.email.label(class="form-control-label demoFont") }}
+                                {% if form.email.errors %}
+                                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.email(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{ form.old_pass.label(class="form-control-label demoFont") }}
+                                {% if form.old_pass.errors %}
+                                {{ form.old_pass(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.old_pass.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.old_pass(class="form-control form-control-lg") }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ form.new_pass.label(class="form-control-label demoFont") }}
+                                {% if form.new_pass.errors %}
+                                {{ form.new_pass(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.new_pass.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ form.new_pass(class="form-control form-control-lg ") }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="form-group">
+                        {{ form.confirm_pass.label(class="form-control-label demoFont") }}
+                        {% if form.confirm_pass.errors %}
+                        {{ form.confirm_pass(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_pass.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.confirm_pass(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group btn-center">
+                {{ form.submit(class="btn btn-outline  button_1 ") }}
+            </div>
+        </form>
+       <div class="border-top pt-3">
+           <small class="text-muted">
+               Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
+           </small>
+       </div>
+    </div>
+   </div>
+{% endblock content %}

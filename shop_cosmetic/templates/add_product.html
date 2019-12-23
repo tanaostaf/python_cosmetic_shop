@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="content-section">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom big mb-4">{{ legend }}</legend>
+            <div class="form-group">
+                <table  width="100%" cellpadding="5" >
+                    <tr>
+                        <td>
+                            {{ form.p_name.label(class="form-control-label demoFont") }}
+                            {% if form.p_name.errors %}
+                                {{ form.p_name(class="form-control form-control-lg is-invalid") }}
+                                    <div class="invalid-feedback">
+                                    {% for error in form.p_name.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                     </div>
+                            {% else %}
+                                {{ form.p_name(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ form.price.label(class="form-control-label demoFont") }}
+                            {% if form.price.errors %}
+                            {{ form.price(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.price.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                            {{ form.price(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+                {{ form.description.label(class="form-control-label demoFont") }}
+                {% if form.description.errors %}
+                    {{ form.description(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{ form.description(class="form-control form-control-lg") | safe}}
+                {% endif %}
+                {{ ckeditor.load() }}
+            </div>
+            <div class="form-group">
+                {{ form.picture.label(class="demoFont") }}
+                {{ form.picture(class="form-control-file") }}
+                {% if form.picture.errors %}
+                      {% for error in form.picture.errors %}
+                         <span class="text-danger">{{ error }}</span></br>
+                      {% endfor %}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group btn-center">
+            {{ form.submit(class="btn btn-outline button_1") }}
+        </div>
+    </form>
+  </div>
+{% endblock content %}

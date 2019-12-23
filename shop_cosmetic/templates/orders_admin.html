@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for order in orders %}
+        <div class="order-admin " >
+            <h3 style="color: #671383; font-family: Georgia, serif; font-weight: 700;">Order: </h3>
+            <table width="90%" cellpadding="5">
+                <tr>
+                    <th>
+                        <b class="demoFont">Last name:  </b><b>{{ order.last_name }}</b>
+                    </th>
+                    <th>
+                        <b class="demoFont">First name:  </b><b>{{ order.first_name }}</b>
+                    </th>
+                </tr>
+            </table>
+            {% for product in order.cart.products %}
+                <article class="media order-admin-3">
+                    <div class="media-body ">
+                        <p class="article-content">
+                            <b class="demoFont">Product:  </b> <b>{{ product.p_name }}</b>
+                            <b class="demoFont">Price:  </b> <b>{{ product.price }} ₴</b>
+                        </p>
+                    </div>
+                     <img class="img-fluid rounded order-admin-2" src="{{ url_for('static', filename='images/'+ product.image)}}">
+                </article>
+            {% endfor %}
+            <form method="POST" action="/orders">
+                <p>
+                    <hr class="line">
+                    <b class="demoFont">Total price:  </b> <b>{{ order.cart.total_price }} ₴</b>
+                    <p style="text-align: right">
+                        <button class="btn button_1" value="{{ order.id }}" name="order_id" type="submit">Close order</button>
+                    </p>
+                </p>
+            </form>
+        </div>
+    {% endfor %}
+
+{% endblock content %}

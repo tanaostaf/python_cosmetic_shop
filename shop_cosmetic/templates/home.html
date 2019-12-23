@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for product in products.items %}
+        <div class="home-product">
+         <img class="img-fluid rounded-circle article-img" src="{{ url_for('static', filename='images/'+ product.image)}}">
+          <div class="media-body">
+            <h2><a class="article-title" href="{{url_for('product', product_id=product.id)}}">{{ product.p_name }}</a></h2>
+              <p class="article-content"><div class="demoFont">Description:</div>{{ product.description | safe }}</p>
+              <p class="article-content"><b class="demoFont">Price: </b> <b>{{ product.price }} ₴</b></p>
+              <form method="POST" action="/cart">
+                  <p><button class="btn button_1" value="{{ product.id }}" name="product_id" type="submit"><div class="demoFont">Add to cart</div></button></p>
+              </form>
+          </div>
+        </div>
+    {% endfor %}
+    <div class="container text-center">
+    {% for page_num in products.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if products.page == page_num %}
+                <a class="btn mb-4 button_pag" href="{{ url_for('home', page=page_num) }}"> {{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline button_pag mb-4" href="{{ url_for('home', page=page_num) }}"> {{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock content %}

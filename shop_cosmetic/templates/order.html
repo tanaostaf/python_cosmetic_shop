@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="order">
+      <h3 style="color: #671383; font-family: Georgia, serif; font-weight: 700;">Your order: </h3>
+      <hr class="line">
+        <div >
+            <table width="50%" cellpadding="5">
+                <tr>
+                    <th>
+                        <form method="POST" action="/submit">
+                            <div class="container-order-1">
+                                <b class="demoFont">Last name: </b>
+                                <br> <input type="text" name="lastname"> <br>
+                                <b class="demoFont"> First name:  </b>
+                                <br> <input type="text" name="firstname"> <br>
+                                <b class="demoFont"> Shipping address:  </b>
+                                <br> <input type="text" name="addresss">
+                            </div>
+
+                    </th>
+                    <th>
+                        {% for product in cart.products %}
+                        <article class="media container-order-product">
+                            <div class="media-body ">
+                                <p class="article-content">
+                                    <b class="demoFont">Product:  </b> <b>{{ product.p_name }}</b>
+                                    <p><b class="demoFont">Price:  </b> <b>{{ product.price }} ₴</b></p>
+                                </p>
+                            </div>
+                            <img class="img-fluid rounded order-admin-2" src="{{ url_for('static', filename='images/'+ product.image)}}">
+                        </article>
+                        {% endfor %}
+
+                    </th>
+                </tr>
+            </table>
+        </div>
+
+          <p>
+            <hr class="line">
+             <b class="demoFont">Total price:  </b> <b>{{ cart.total_price  }} ₴</b>
+                <p style="text-align: right">
+                        <button class="btn button_1" value="{{ cart.id }}" name="cart_id" type="submit">Order</button>
+                </p>
+          </p>
+      </form>
+  </div>
+{% endblock content %}
